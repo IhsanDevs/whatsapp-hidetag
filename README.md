@@ -1,4 +1,7 @@
-# whatsapp-hidetag
+# WhatsApp Hidetag
+
+<img width="1018" alt="Tangkapan Layar 2024-07-05 pukul 23 57 58" src="https://github.com/IhsanDevs/whatsapp-hidetag/assets/66362682/3b0d925f-4b93-4356-8b53-560a043561c9">
+
 
 ### Installation
 
