@@ -10,7 +10,6 @@ import {
 } from "@whiskeysockets/baileys";
 import pino from "pino";
 import fs from "fs-extra";
-import emojiRegex from "emoji-regex";
 
 const logger = pino({
   level: "silent",
@@ -23,7 +22,9 @@ const showBanner = () => {
 
   const program_name = "Hidetag Whatsapp";
 
-  const author = chalk.yellow("Author: ") + chalk.yellowBright("Ihsan Devs\n");
+  const author =
+    chalk.yellow("\nSource: ") +
+    chalk.underline.greenBright("https://t.me/Hackability\n");
 
   const howToUseEn =
     chalk.magenta.bold("How to use:\n") +
