@@ -151,27 +151,31 @@ const whatsapp = async () => {
           emojies = textMessage.match(
             /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu
           );
-        } catch (error) {
-          return;
-        }
 
-        if (emojies.length > 0) {
+          if (emojies.length > 0) {
+            spinner
+              .info(
+                `New hidetag message requested into group: ${chalk.underline.bold.yellowBright(
+                  groupName
+                )} (${
+                  groupParticipants.length
+                } participants)\nHidetag message: ${textMessage}\n\n`
+              )
+              .start();
+
+            // edit message, then mentions all participants.
+            sock.sendMessage(groupJid, {
+              text: textMessage,
+              edit: message.key,
+              mentions: groupParticipants.map((item) => item.id),
+            });
+          }
+        } catch (error) {
           spinner
-            .info(
-              `New hidetag message requested into group: ${chalk.underline.bold.yellowBright(
-                groupName
-              )} (${
-                groupParticipants.length
-              } participants)\nHidetag message: ${textMessage}\n\n`
+            .fail(
+              `Failed to send message using hidetag. Error: ${error.toString()}`
             )
             .start();
-
-          // edit message, then mentions all participants.
-          sock.sendMessage(groupJid, {
-            text: textMessage,
-            edit: message.key,
-            mentions: groupParticipants.map((item) => item.id),
-          });
         }
       }
 
@@ -183,28 +187,32 @@ const whatsapp = async () => {
           emojies = textMessage.match(
             /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu
           );
-        } catch (error) {
-          return;
-        }
 
-        if (emojies.length > 0) {
+          if (emojies.length > 0) {
+            spinner
+              .info(
+                `New hidetag image message: ${textMessage} requested into group: ${chalk.underline.bold.yellowBright(
+                  groupName
+                )} (${
+                  groupParticipants.length
+                } participants)\nHidetag message: ${textMessage}\n\n`
+              )
+              .start();
+
+            // edit message, then mentions all participants.
+            sock.sendMessage(groupJid, {
+              image: message.message.imageMessage,
+              caption: textMessage,
+              edit: message.key,
+              mentions: groupParticipants.map((item) => item.id),
+            });
+          }
+        } catch (error) {
           spinner
-            .info(
-              `New hidetag image message: ${textMessage} requested into group: ${chalk.underline.bold.yellowBright(
-                groupName
-              )} (${
-                groupParticipants.length
-              } participants)\nHidetag message: ${textMessage}\n\n`
+            .fail(
+              `Failed to send message using hidetag. Error: ${error.toString()}`
             )
             .start();
-
-          // edit message, then mentions all participants.
-          sock.sendMessage(groupJid, {
-            image: message.message.imageMessage,
-            caption: textMessage,
-            edit: message.key,
-            mentions: groupParticipants.map((item) => item.id),
-          });
         }
       }
     }
