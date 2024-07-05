@@ -152,6 +152,10 @@ const whatsapp = async () => {
             /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu
           );
 
+          if (!emojies) {
+            return;
+          }
+
           if (emojies.length > 0) {
             spinner
               .info(
@@ -187,6 +191,10 @@ const whatsapp = async () => {
           emojies = textMessage.match(
             /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu
           );
+
+          if (!emojies) {
+            return;
+          }
 
           if (emojies.length > 0) {
             spinner
