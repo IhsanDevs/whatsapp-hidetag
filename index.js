@@ -146,9 +146,14 @@ const whatsapp = async () => {
           message.message.extendedTextMessage?.text ||
           message.message.conversation;
 
-        const emojies = textMessage.match(
-          /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu
-        );
+        let emojies;
+        try {
+          emojies = textMessage.match(
+            /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu
+          );
+        } catch (error) {
+          return;
+        }
 
         if (emojies.length > 0) {
           spinner
@@ -173,11 +178,16 @@ const whatsapp = async () => {
       if (message.message.imageMessage?.caption) {
         let textMessage = message.message.imageMessage?.caption;
 
-        const emojies = textMessage.match(
-          /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu
-        );
+        let emojies;
+        try {
+          emojies = textMessage.match(
+            /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu
+          );
+        } catch (error) {
+          return;
+        }
 
-        if (emojies.length) {
+        if (emojies.length > 0) {
           spinner
             .info(
               `New hidetag image message: ${textMessage} requested into group: ${chalk.underline.bold.yellowBright(
